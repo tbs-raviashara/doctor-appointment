@@ -1,0 +1,29 @@
+.set_Events {
+ padding-left: 2px;
+ border-left: 8px solid;
+ padding-bottom: 5px;
+}
+
+.pending_borderColor {
+ border-left-color: var(--ion-color-warning);
+}
+
+.accept_borderColor {
+ border-left-color: var(--ion-color-success);
+}
+
+.reject_borderColor {
+ border-left-color: var(--ion-color-danger);
+}
+
+.calendar-card {
+ padding: 16px;
+ border-top: 5rem solid var(--ion-color-primary);
+
+ .calendar-row {
+  margin-top: -5rem;
+  background: #fff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+ }
+}

@@ -1,0 +1,39 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Schedule List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="schedule-list">
+  <div class="schedule-list-div">
+    <ion-card padding *ngIf="showSkeleton == false" class="schedule-list-card">
+      <ion-list *ngFor="let data of scheduleData">
+        <!-- Sliding item with text options on Right sides -->
+        <ion-item-sliding>
+          <ion-item-options side="end">
+            <ion-item-option color="medium" (click)="moreSelect(data)">
+              <ion-icon slot="top" name="more"></ion-icon>
+              More
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item no-padding>
+            <ion-label>
+              <h2>{{data?.title}}</h2>
+              <p>{{data?.notes}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <p *ngIf="scheduleData.length == 0" text-center>
+        No schedules found
+      </p>
+    </ion-card>
+    <ion-card padding *ngIf="showSkeleton == true" class="schedule-list-card">
+      <ion-skeleton-text animated padding></ion-skeleton-text>
+      <ion-skeleton-text animated padding></ion-skeleton-text>
+    </ion-card>
+  </div>
+</ion-content>

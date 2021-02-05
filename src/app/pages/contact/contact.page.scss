@@ -1,0 +1,16 @@
+.button_custom {
+ --padding-start: 7px;
+ --padding-end: 7px;
+}
+
+.doctor-card {
+ padding: 16px;
+ border-top: 5rem solid var(--ion-color-primary);
+
+ .doctor-grid {
+  margin-top: -5rem;
+  background: #fff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+ }
+}

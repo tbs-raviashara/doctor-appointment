@@ -1,0 +1,16 @@
+.appoint {
+  .label-fontsize {
+    font-size: 22px;
+  }
+  .appoint-div {
+    padding: 16px;
+    border-top: 5rem solid var(--ion-color-primary);
+  }
+
+  .appoint-card {
+    margin-top: -5rem;
+    background: #fff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+}

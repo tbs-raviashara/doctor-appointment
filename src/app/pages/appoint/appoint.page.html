@@ -1,0 +1,126 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{title}} Appoint</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="appoint">
+    <div class="appoint-div">
+
+    </div>
+    <ion-card class="appoint-card">
+        <form [formGroup]="appointForm" (ngSubmit)="appointFormSubmit(appointForm)">
+            <ion-row padding>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Schedule Title</ion-label>
+                        <ion-input type="text" name="title" formControlName="title" placeholder="Schedule Title" readonly="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Patient Name</ion-label>
+                        <ion-input type="text" name="patient_name" formControlName="patient_name" placeholder="Patient Name"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.patient_name.valid &&(appointForm.controls.patient_name.dirty ||appointForm.controls.patient_name.touched)">
+                        <div *ngIf="appointForm.controls['patient_name'].errors['required']">
+                            <ion-text color="danger">Patient name is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Date</ion-label>
+                        <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date" name="date" formControlName="date" [min]="minDate" [max]="maxDate"></ion-datetime>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.date.valid &&(appointForm.controls.date.dirty ||appointForm.controls.date.touched)">
+                        <div *ngIf="appointForm.controls['date'].errors['required']">
+                            <ion-text color="danger">Date is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="6">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Start Time</ion-label>
+                        <ion-datetime displayFormat="HH:mm" placeholder="Start Time" name="startTime" formControlName="startTime"></ion-datetime>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.startTime.valid &&(appointForm.controls.startTime.dirty ||appointForm.controls.startTime.touched)">
+                        <div *ngIf="appointForm.controls['startTime'].errors['required']">
+                            <ion-text color="danger">Start Time is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="6">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">End Time</ion-label>
+                        <ion-datetime displayFormat="HH:mm" placeholder="End Time" name="endTime" formControlName="endTime"></ion-datetime>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.endTime.valid &&(appointForm.controls.endTime.dirty ||appointForm.controls.endTime.touched)">
+                        <div *ngIf="appointForm.controls['endTime'].errors['required']">
+                            <ion-text color="danger">End Time is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Location</ion-label>
+                        <ion-input name="location" formControlName="location" placeholder="Location" readonly="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Contact number</ion-label>
+                        <ion-input type="number" name="cno" formControlName="cno" placeholder="Contact number"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.cno.valid &&(appointForm.controls.cno.dirty ||appointForm.controls.cno.touched)">
+                        <div *ngIf="appointForm.controls['cno'].errors['required']">
+                            <ion-text color="danger">Contact number is required</ion-text>
+                        </div>
+                        <div *ngIf="appointForm.controls['cno'].errors['pattern']">
+                            <ion-text color="danger">Enter Proper number.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Mail</ion-label>
+                        <ion-input type="email" name="mail" formControlName="mail" placeholder="Mail"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!appointForm.controls.mail.valid &&(appointForm.controls.mail.dirty ||appointForm.controls.mail.touched)">
+                        <div *ngIf="appointForm.controls['mail'].errors['required']">
+                            <ion-text color="danger">Email is required.</ion-text>
+                        </div>
+                        <div *ngIf="appointForm.controls['mail'].errors['email']">
+                            <ion-text color="danger">Enter proper email.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Note</ion-label>
+                        <ion-textarea name="notes" formControlName="notes" placeholder="Note"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="10" offset="1">
+                    <ion-button shape="round" expand="block" type="submit" [disabled]="!appointForm.valid">
+                        <ion-ripple-effect></ion-ripple-effect>
+                        {{title}} Appointment
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>History</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="hisroty-card">
+        <ion-row class="hisroty-row">
+            <ion-col size="12">
+                <ion-searchbar mode="ios" animated="true" placeholder="Search appointment" #search></ion-searchbar>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <ion-row>
+        <ion-col size="12" *ngIf="showSkeleton == false">
+            <p *ngIf="historyOfAppointment.length == 0" text-center>
+                No found data
+            </p>
+            <ion-card *ngFor="let data of historyOfAppointment | filter : returnVal(data?.type) : search?.value">
+                <ion-card-header>
+                    <ion-card-subtitle>{{ data?.type == "Sender" ? data?.title : data?.patient_name}}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content no-padding padding-horizontal>
+                    <p>Date: {{ data?.date | date }} </p>
+                    <p>Time: {{ data?.startTime }} - {{ data?.endTime }} </p>
+                    <p>Location: {{ data?.location }} </p>
+                    <p *ngIf='data?.type == "Receiver" '>Contact No: {{ data?.cno }}</p>
+                    <p *ngIf='data?.notes != "" && data?.type == "Receiver" '>Notes: {{ data?.notes }}</p>
+                    <p padding-top float-left *ngIf='data?.type == "Sender";else showReceiver'>
+                        <ion-chip [color]="data?.status == 'Accept' ? 'success': data?.status == 'Reject' ? 'danger' : 'warning'">
+                            <ion-icon [name]="data?.status == 'Accept' ? 'checkmark-circle' : data?.status == 'Reject' ? 'close-circle' : 'information-circle'" [color]="data?.status == 'Accept' ? 'success': data?.status == 'Reject' ? 'danger' : 'warning'"></ion-icon>
+                            <ion-label>{{data?.status == 'Accept' ? 'Accept' : data?.status == 'Reject' ? 'Reject' : 'Pending'}}</ion-label>
+                        </ion-chip>
+                    </p>
+                    <ng-template #showReceiver>
+                        <p padding-top float-left *ngIf='data?.status == "Pending"'>
+                            <ion-chip color="success" (click)="changeStatus(data,'Accept')">
+                                <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                                <ion-label>Accept</ion-label>
+                            </ion-chip>
+
+                            <ion-chip color="danger" (click)="changeStatus(data,'Reject')">
+                                <ion-icon name="close-circle" color="danger"></ion-icon>
+                                <ion-label>Reject</ion-label>
+                            </ion-chip>
+                        </p>
+                        <p padding-top float-left *ngIf='data?.status != "Pending"'>
+                            <ion-chip [color]="data?.status == 'Accept' ? 'success':'danger'">
+                                <ion-icon [name]="data?.status == 'Accept' ? 'checkmark-circle' : 'close-circle'" [color]="data?.status == 'Accept' ? 'success':'danger'"></ion-icon>
+                                <ion-label>{{data?.status == 'Accept' ? 'Accept' : 'Reject'}}</ion-label>
+                            </ion-chip>
+                        </p>
+                    </ng-template>
+
+                    <p padding-top float-right *ngIf='data?.status == "Pending" && data?.type == "Sender"'>
+                        <ion-buttons slot="end">
+                            <ion-button color="danger" fill="outline" shape="round" slot="start" (click)='deleteAppointmentData(data?.id,data?.receiverID)'>
+                                <ion-icon slot="start" name="trash"></ion-icon>
+                                Delete
+                            </ion-button>
+                            <ion-button fill="outline" shape="round" color="primary" slot="start" (click)="editAppointmentData(data)">
+                                <ion-icon slot="start" name="create"></ion-icon>
+                                Edit
+                            </ion-button>
+                        </ion-buttons>
+                    </p>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+        <ion-col size="12" *ngIf="showSkeleton == true" padding>
+            <ion-card padding>
+                <ion-skeleton-text padding animated style="width: 80%; height: 20px" slot="start"></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 50%;"></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 65%;"></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 50%;"></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 70%;"></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 30%;" float-left></ion-skeleton-text>
+                <ion-skeleton-text padding-bottom animated style="width: 40%;" float-right></ion-skeleton-text>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>

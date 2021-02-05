@@ -1,0 +1,59 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Find a doctor</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="doctor-card">
+        <ion-grid class="doctor-grid">
+            <ion-row>
+                <ion-col>
+                    <ion-searchbar mode="ios" animated="true" placeholder="Search Doctor" #search></ion-searchbar>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <ion-list *ngIf="showSkeleton == false">
+        <ion-item *ngFor="let c of Data | filter:'title':search?.value">
+            <ion-row>
+                <ion-col size="8">
+                    <strong>{{c?.title}}</strong>
+                </ion-col>
+                <ion-col size="4">{{c?.cno}}</ion-col>
+                <ion-col size="12">
+                    {{c?.location}}
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button fill="outline" shape="round" no-padding class="button_custom" (click)="createAppointment(c)">
+                        <ion-icon slot="start" name="add"></ion-icon>
+                        Add appointment
+                    </ion-button>
+                    <ion-button fill="outline" shape="round" no-padding class="button_custom" (click)="viewDetails(c)">
+                        <ion-icon slot="start" name="eye"></ion-icon>
+                        View details
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <p *ngIf="Data.length == 0" text-center>
+            No doctors found
+        </p>
+    </ion-list>
+    <ion-list *ngIf="showSkeleton == true" no-margin>
+        <ion-item lines="none">
+            <ion-skeleton-text animated style="width:55%; height: 25px;" slot="start"></ion-skeleton-text>
+            <ion-skeleton-text animated style="height: 25px;" slot="end"></ion-skeleton-text>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-skeleton-text animated style="width:100%; height: 40px;"></ion-skeleton-text>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-skeleton-text padding-bottom animated style="width:35%;" slot="start"></ion-skeleton-text>
+            <ion-skeleton-text padding-bottom animated style="width:30%;" slot="start"></ion-skeleton-text>
+        </ion-item>
+    </ion-list>
+</ion-content>

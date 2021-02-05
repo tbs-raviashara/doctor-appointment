@@ -1,0 +1,32 @@
+.propicImg {
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  padding: 2px;
+  width: 100px !important;
+  height: 100px !important;
+  display: inline-block;
+}
+
+.profile {
+  .label-fontsize {
+    font-size: 22px;
+  }
+
+  .setMultiselect {
+    color: var(--ion-color-light-contrast);
+    font-size: 16px !important;
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  .ImageCard {
+    background: var(--ion-color-primary);
+    padding-bottom: 50px;
+    border-radius: 0;
+  }
+
+  .contentCard {
+    top: -50px;
+    border-radius: 20px 20px 5px 5px;
+    background: #fff;
+  }
+}

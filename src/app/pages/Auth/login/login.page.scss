@@ -1,0 +1,32 @@
+.Login {
+    .setBottom {
+        height: calc(100% - 170px);
+    }
+
+    .passwordIcon {
+        font-size: 1.5rem;
+        position: absolute;
+        top: 23px !important;
+        right: 0;
+        padding-right: 10px;
+        z-index: 99999;
+        padding-left: 10px;
+    }
+
+    .login-div {
+        padding: 16px;
+        border-top: 5rem solid var(--ion-color-primary);
+
+        .login-div-img {
+            margin-top: -5rem;
+            background: #fff;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    }
+
+    .set-div_top {
+        margin-top: -25px;
+        padding: 20px;
+    }
+}

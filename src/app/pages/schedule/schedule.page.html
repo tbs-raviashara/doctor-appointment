@@ -1,0 +1,136 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ title }} Schedule</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="schedule">
+    <div class="schedule-div">
+
+    </div>
+    <ion-card class="schedule-card">
+        <form [formGroup]="scheduleForm" (ngSubmit)="scheduleFormSubmit(scheduleForm)">
+            <ion-row padding>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Schedule Title</ion-label>
+                        <ion-input type="text" name="title" formControlName="title" placeholder="Schedule Title"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.title.valid &&(scheduleForm.controls.title.dirty ||scheduleForm.controls.title.touched)">
+                        <div *ngIf="scheduleForm.controls['title'].errors['required']">
+                            <ion-text color="danger">Title is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Start Date</ion-label>
+                        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" placeholder="Start Date" name="startDate" formControlName="startDate"></ion-datetime>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.startDate.valid &&(scheduleForm.controls.startDate.dirty ||scheduleForm.controls.startDate.touched)">
+                        <div *ngIf="scheduleForm.controls['startDate'].errors['required']">
+                            <ion-text color="danger">Start Date is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">End Date</ion-label>
+                        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" placeholder="End Date" name="endDate" formControlName="endDate"></ion-datetime>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.endDate.valid &&(scheduleForm.controls.endDate.dirty ||scheduleForm.controls.endDate.touched)">
+                        <div *ngIf="scheduleForm.controls['endDate'].errors['required']">
+                            <ion-text color="danger">End Date is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Charge per slot</ion-label>
+                        <ion-input type="number" name="charge" formControlName="charge" placeholder="Charge per slot"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.charge.valid &&(scheduleForm.controls.charge.dirty ||scheduleForm.controls.charge.touched)">
+                        <div *ngIf="scheduleForm.controls['charge'].errors['required']">
+                            <ion-text color="danger">Charge is required.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Select Days</ion-label>
+                        <ion-select multiple="true" cancelText="dismiss" okText="Select" name="days" formControlName="days" mode="ios">
+                            <ion-select-option value="Sunday">Sunday</ion-select-option>
+                            <ion-select-option value="Monday">Monday</ion-select-option>
+                            <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+                            <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+                            <ion-select-option value="Thursday">Thursday</ion-select-option>
+                            <ion-select-option value="Friday">Friday</ion-select-option>
+                            <ion-select-option value="Saturday">Saturday</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.days.valid &&(scheduleForm.controls.days.dirty ||scheduleForm.controls.days.touched)">
+                        <div *ngIf="scheduleForm.controls['days'].errors['required']">
+                            <ion-text color="danger">Select days.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Location</ion-label>
+                        <ion-input name="location" formControlName="location" placeholder="Location"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.location.valid &&(scheduleForm.controls.location.dirty ||scheduleForm.controls.location.touched)">
+                        <div *ngIf="scheduleForm.controls['location'].errors['required']">
+                            <ion-text color="danger">Location is required</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Contact number</ion-label>
+                        <ion-input type="number" name="cno" formControlName="cno" placeholder="Contact number"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.cno.valid &&(scheduleForm.controls.cno.dirty ||scheduleForm.controls.cno.touched)">
+                        <div *ngIf="scheduleForm.controls['cno'].errors['required']">
+                            <ion-text color="danger">Contact number is required</ion-text>
+                        </div>
+                         <div *ngIf="scheduleForm.controls['cno'].errors['pattern']">
+                             <ion-text color="danger">Enter Proper number.</ion-text>
+                         </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Mail</ion-label>
+                        <ion-input type="email" name="mail" formControlName="mail" placeholder="Mail"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!scheduleForm.controls.mail.valid &&(scheduleForm.controls.mail.dirty ||scheduleForm.controls.mail.touched)">
+                        <div *ngIf="scheduleForm.controls['mail'].errors['required']">
+                            <ion-text color="danger">Email is required.</ion-text>
+                        </div>
+                        <div *ngIf="scheduleForm.controls['mail'].errors['email']">
+                            <ion-text color="danger">Enter proper email.</ion-text>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item no-padding>
+                        <ion-label position="stacked" class="label-fontsize">Note</ion-label>
+                        <ion-textarea name="notes" formControlName="notes" placeholder="Note"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="10" offset="1">
+                    <ion-button shape="round" expand="block" type="submit" [disabled]="!scheduleForm.valid">
+                        <ion-ripple-effect></ion-ripple-effect>
+                        {{ title }} Schedule
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-card>
+</ion-content>

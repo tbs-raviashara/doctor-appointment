@@ -1,0 +1,27 @@
+.menu {
+  .menu_header {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+
+    .user_logo {
+      background: var(--ion-color-primary-contrast);
+      padding: 2px;
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+    }
+  }
+
+  .menu_content {
+    .list-md {
+      background: var(--ion-color-primary) !important;
+    }
+  }
+  
+  .setFootercolor{
+    background: var(--ion-color-primary);
+  }
+  .list-ios{
+    background: none;
+  }
+}

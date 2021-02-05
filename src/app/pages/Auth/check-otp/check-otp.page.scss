@@ -1,0 +1,15 @@
+.OTP {
+    .otpInput {
+        ion-input {
+            display: inline-block;
+            width: 25px;
+            height: 30px;
+            margin: 10px;
+            --padding-start: 0px;
+            border-bottom: 1px solid;
+        }
+    }
+    .showContent {
+        display: block;
+    }
+}

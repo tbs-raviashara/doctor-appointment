@@ -1,0 +1,37 @@
+<ion-app>
+    <!-- <ion-split-pane> -->
+    <ion-menu class="menu" mode="ios">
+        <ion-header text-center padding-top class="menu_header" [routerLink]="['/profile']" mode="ios">
+            <img [src]="userData?.image != '' ? _DomSanitizer.bypassSecurityTrustUrl(userData?.image) : '../../assets/img/user.png'" class="user_logo" />
+            <ion-toolbar text-center color="primary" *ngIf="userData?.fullName != ''">
+                <ion-title>{{userData?.fullName}}</ion-title>
+            </ion-toolbar>
+            <p no-margin margin-bottom>{{userData?.occupation}}</p>
+        </ion-header>
+        <ion-content class="menu_content" color="primary">
+            <ion-list>
+                <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                    <ion-item color="primary" [routerDirection]="'root'" [routerLink]="[p?.url]" lines="none">
+                        <ion-icon slot="start" [name]="p?.icon"></ion-icon>
+                        <ion-label>
+                            {{ p?.title }}
+                        </ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+                <ion-menu-toggle auto-hide="false">
+                    <ion-item color="primary" (click)="logout()" [routerDirection]="'root'" [routerLink]="'/login'" lines="none">
+                        <ion-icon slot="start" name="power"></ion-icon>
+                        <ion-label>
+                            Sign Out
+                        </ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </ion-content>
+        <ion-footer text-center padding-vertical no-lines *ngIf="version != ''" class="setFootercolor">
+            <ion-text color="light">Version {{version}}</ion-text>
+        </ion-footer>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+    <!-- </ion-split-pane> -->
+</ion-app>

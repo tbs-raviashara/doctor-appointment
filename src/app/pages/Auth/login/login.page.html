@@ -1,0 +1,72 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="Login">
+    <div class="login-div">
+        <div text-center class="login-div-img">
+            <img src="../../../../assets/img/Logo.png" alt="Logo" width="150" height=150 />
+        </div>
+    </div>
+    <div class="set-div_top">
+        <ion-row class="ion-align-items-end setBottom" margin-bottom>
+            <ion-col size="12" sizeMd="6" offsetMd="3" sizeLg="6" offsetLg="3" sizeXl="4" offsetXl="4">
+                <form [formGroup]="loginForm" (ngSubmit)="loginformSubmit(loginForm)">
+                    <ion-item no-padding>
+                        <ion-label position="floating">Email
+                        </ion-label>
+                        <ion-input type="email" clearInput="true" name="email" formControlName="email"></ion-input>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!loginForm.controls.email.valid &&(loginForm.controls.email.dirty ||loginForm.controls.email.touched)">
+                        <div *ngIf="loginForm.controls['email'].errors['required']">
+                            <ion-text color="danger">Email is required.</ion-text>
+                        </div>
+                        <div *ngIf="loginForm.controls['email'].errors['email']">
+                            <ion-text color="danger">Enter proper email.</ion-text>
+                        </div>
+                    </div>
+                    <ion-item no-padding>
+                        <ion-label position="floating">Password
+                        </ion-label>
+                        <ion-input [type]="passwordType" clearOnEdit="false" name="password" formControlName="password"></ion-input>
+                        <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+                    </ion-item>
+                    <div margin-top margin-left *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty ||loginForm.controls.password.touched)">
+                        <div *ngIf="loginForm.controls['password'].errors['required']">
+                            <ion-text color="danger">Please enter password.</ion-text>
+                        </div>
+                        <div *ngIf="loginForm.controls['password'].errors['minlength']">
+                            <ion-text color="danger">You have to enter at least 6 character!</ion-text>
+                        </div>
+                    </div>
+                    <ion-list>
+                        <ion-item lines="none" no-padding>
+                            <ion-label>Remember Email & Password</ion-label>
+                            <ion-checkbox slot="start" name="remember" formControlName="remember" mode="md"></ion-checkbox>
+                        </ion-item>
+                    </ion-list>
+                    <div text-center padding>
+                        <ion-button type="submit" shape="round" expand="block" [disabled]="!loginForm.valid">
+                            <ion-ripple-effect></ion-ripple-effect>
+                            Login
+                        </ion-button>
+                    </div>
+                </form>
+                <div text-center>
+                    <ion-button fill="clear" [routerLink]="['/forgot-password']">
+                        <ion-ripple-effect></ion-ripple-effect>
+                        Forgot Password ?
+                    </ion-button>
+                </div>
+            </ion-col>
+            <ion-col size="12" sizeMd="6" offsetMd="3">
+                <ion-button shape="round" expand="block" [routerLink]="['/register']">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    Create Account
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

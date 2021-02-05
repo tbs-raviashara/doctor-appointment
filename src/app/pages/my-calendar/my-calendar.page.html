@@ -1,0 +1,50 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios" color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>My Calendar</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div margin-bottom class="calendar-card">
+        <ion-row class="calendar-row">
+            <ion-col text-center size="12">
+                {{viewTitle}}
+            </ion-col>
+            <ion-col size="12">
+                <calendar [showEventDetail]="false" [autoSelect]="true" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onTitleChanged)="onViewTitleChanged($event)" step="30" class="calendar" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onTimeSelected)="onTimeSelected($event)">
+                </calendar>
+            </ion-col>
+        </ion-row>
+    </div>
+    <h3 margin>Booked Appointment</h3>
+    <ion-card class="set_Events" *ngFor="let dayData of day_Date" [ngClass]="dayData?.status == 'Pending' ? 'pending_borderColor' : dayData?.status == 'Accept' ? 'accept_borderColor' : 'reject_borderColor'">
+        <ion-item-sliding>
+            <ion-item-options side="end" *ngIf="dayData?.status == 'Pending' && dayData?.type == 'Sender'">
+                <ion-item-option color="medium" expandable (click)="morTask(dayData)">
+                    <ion-icon slot="top" name="more"></ion-icon> More
+                </ion-item-option>
+            </ion-item-options>
+            <ion-item lines="none">
+                <ion-row class="setRowWidth">
+                    <ion-col size="12">
+                        <h5 no-margin margin-top>{{ dayData?.type == "Sender" ? dayData?.title : dayData?.patient_name}} </h5>
+                    </ion-col>
+                    <ion-col size="12">
+                        <h6 no-margin>
+                            <ion-text>{{ dayData?.startTime | formatDate : 'MM/DD/YYYY HH:MM'}}</ion-text>
+                        </h6>
+                    </ion-col>
+                    <ion-col size="12">
+                        <h6 no-margin>
+                            <ion-text [color]="dayData?.status == 'Accept' ? 'success': dayData?.status == 'Reject' ? 'danger' : 'warning'">{{ dayData?.status }}
+                            </ion-text>
+                        </h6>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-item-sliding>
+    </ion-card>
+</ion-content>

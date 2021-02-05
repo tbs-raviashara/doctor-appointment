@@ -1,0 +1,17 @@
+.schedule-list {
+  .setdaysBlock {
+    white-space: normal;
+  }
+
+  .schedule-list-div {
+    padding: 16px 16px 0px 16px;
+    border-top: 5rem solid var(--ion-color-primary);
+
+    .schedule-list-card {
+      margin-top: -5rem;
+      background: #fff;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+  }
+}
