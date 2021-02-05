@@ -31,7 +31,7 @@ ionic serve --open
 ionic cordova platform add android
 ```
 
-### Build Project
+## Build Project
 ```
 ionic cordova build android
 ```
@@ -41,7 +41,18 @@ ionic cordova build android
 ionic cordova run android
 ```
 
-### Clean Project
+## Clean Project
 ```
 npm run clean
+```
+
+## How to use
+```
+git clone https://github.com/tbs-raviashara/doctor-appointment.git
+cd doctor-appointment
+npm i or npm install
+ionic serve
+ionic cordova platform add android
+ionic cordova build android
+ionic cordova run android
 ```
